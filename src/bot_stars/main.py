@@ -13,7 +13,7 @@ from telegram.ext import (
     CallbackQueryHandler,
 )
 from telegram.warnings import PTBUserWarning
-from .keyboards import BTN_HELP, BTN_ADMIN_ADDSTARS, BTN_ADMIN_REMSTARS
+from .keyboards import BTN_HELP, BTN_ASK, BTN_ADMIN_ADDSTARS, BTN_ADMIN_REMSTARS
 from .commands import (
     handle_menu,
     start,
@@ -29,8 +29,6 @@ from .commands import (
     block_user,
     unblock_user,
     viewstars,
-    stop,
-    cancel_conversation,
     list_users,
     show_user_stars,
     handle_confirmation,
@@ -46,7 +44,6 @@ from .commands import (
     handle_answer,
     ANSWER_INPUT,
     start_question_flow,
-    remove_keyboard,
     stars_add,
     stars_remove,
     SELECT_TEEN,
@@ -107,7 +104,7 @@ def main():
     #Вопросы
     app.add_handler(ConversationHandler(
         entry_points=[
-            MessageHandler(filters.Text([BTN_HELP]), start_question_flow),
+            MessageHandler(filters.Text([BTN_ASK]), start_question_flow),
             CommandHandler('active_questions', active_questions),
             CallbackQueryHandler(handle_admin_actions, pattern="^(answer_|reject_|select_)")
         ],

@@ -1,8 +1,8 @@
 from telegram import ReplyKeyboardMarkup
 
 # Отмена
-BTN_CANCEL = ReplyKeyboardMarkup([['🚫 Отменить вопрос']], resize_keyboard=True)
-BTN_BACK = ReplyKeyboardMarkup([['🔙 Вернуться в меню']], resize_keyboard=True)
+BTN_CANCEL = ReplyKeyboardMarkup([["🚫 Отменить вопрос"]], resize_keyboard=True)
+BTN_BACK = ReplyKeyboardMarkup([["🔙 Вернуться в меню"]], resize_keyboard=True)
 
 # Тексты кнопок как константы
 BTN_BALANCE = "💫 Мой баланс"
@@ -13,7 +13,9 @@ BTN_TOP = "🏆 Топ"
 
 # Главная клавиатура
 MAIN_MENU_KEYBOARD = ReplyKeyboardMarkup(
-    [[BTN_BALANCE], [BTN_TOP, BTN_HELP]], resize_keyboard=True, one_time_keyboard=False
+    [[BTN_BALANCE, BTN_TOP], [BTN_HELP, BTN_ASK]],
+    resize_keyboard=True,
+    one_time_keyboard=False,
 )
 
 
