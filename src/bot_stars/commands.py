@@ -1223,8 +1223,10 @@ async def top(update: Update, context: ContextTypes.DEFAULT_TYPE):
         for row in data[1:]:
             try:
                 user_id = int(row[0])
-                user = str(row[1]) + ' ' + str(row[2])  # user
-                stars = int(row[6])        # stars
+                user = str(row[1])  # user
+                stars = int(row[6]) if len(row) > 6 and row[6] and row[6].isdigit() else 0  # stars
+                if stars < 1:
+                    continue
                 entry = (user_id, user, stars)
                 stars_list.append(entry)
 
@@ -1235,7 +1237,7 @@ async def top(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 continue
 
         if not stars_list:
-            await update.message.reply_text("ℹ️ Нет данных о звёздах")
+            await update.message.reply_text("ℹ️ Пока нет данных о звёздах")
             return
 
         sorted_users = sorted(stars_list, key=lambda x: x[2], reverse=True)
