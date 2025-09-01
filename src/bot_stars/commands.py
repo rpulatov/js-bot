@@ -563,18 +563,21 @@ async def viewstars(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     lines = []
     lines.append(f"✨ <b>Твой баланс:</b> {stars} {stars_text}\n")
-    lines.append("📜 <b>Последние операции:</b>\n")
-    for operation in operations:
-        operation_type = operation[1]  # Колонка "Тип операции"
-        amount = int(operation[2])  # Колонка "Звёзды"
-        comment = operation[3]  # Колонка "Комментарий"
-        datetime_str = operation[4]  # Колонка "Дата и время"
-        if operation_type == "Пополнение": symbol = "➕"
-        else: symbol = "➖"
-        lines.append(f"{symbol} <b>{amount}</b> — {comment}")
-        lines.append(f"🗓 {format_date(datetime_str)}\n")
+    if not operations:
+        lines.append("У тебя пока нет операций со звездами")
+    else:
+        lines.append("📜 <b>Последние операции:</b>\n")
+        for operation in operations:
+            operation_type = operation[1]  # Колонка "Тип операции"
+            amount = int(operation[2])  # Колонка "Звёзды"
+            comment = operation[3]  # Колонка "Комментарий"
+            datetime_str = operation[4]  # Колонка "Дата и время"
+            if operation_type == "Пополнение": symbol = "➕"
+            else: symbol = "➖"
+            lines.append(f"{symbol} <b>{amount}</b> — {comment}")
+            lines.append(f"🗓 {format_date(datetime_str)}\n")
 
-    lines.append("ℹ️ Эти звезды ты сможешь обменять на реальные призы в день ярмарки!")
+    lines.append("ℹ️ Эти звезды ты сможешь обменять на реальные призы в день ярмарки! За что начисляются звезды? Жми /help")
     message = "\n".join(lines)
     await update.message.reply_text(message, parse_mode="HTML")
 

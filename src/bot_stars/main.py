@@ -16,6 +16,7 @@ from telegram.warnings import PTBUserWarning
 from .keyboards import BTN_HELP, BTN_ASK, BTN_ADMIN_ADDSTARS, BTN_ADMIN_REMSTARS
 from .commands import (
     handle_menu,
+    send_help_message,
     start,
     get_phone,
     get_name,
@@ -152,6 +153,7 @@ def main():
     app.add_handler(CallbackQueryHandler(handle_admin_actions, pattern="^reject_"))
     app.add_handler(CallbackQueryHandler(handle_admin_actions, pattern="^select_"))
     
+    app.add_handler(CommandHandler("help", send_help_message))
     app.add_handler(CommandHandler("viewstars", viewstars))
     app.add_handler(conv_handler)
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_menu))
