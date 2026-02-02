@@ -56,6 +56,7 @@ from .commands import (
     stars_enter_comment,
     HANDLING_QUESTION,
 )
+from .health import start_health_server
 
 
 warnings.filterwarnings("ignore", category=PTBUserWarning)
@@ -63,6 +64,10 @@ warnings.filterwarnings("ignore", category=PTBUserWarning)
 
 def main():
     load_dotenv()
+    # Запуск HTTP healthcheck сервера в фоне как можно раньше
+    HEALTH_PORT = int(os.getenv("HEALTHCHECK_PORT", "8000"))
+    start_health_server(port=HEALTH_PORT)
+
     TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
     SPREADSHEET_NAME = os.getenv("SPREADSHEET_NAME")
     CREDENTIALS_FILE = os.getenv("CREDENTIALS_FILE")
